@@ -6,7 +6,7 @@ import { LoginStackParamList, RootStackParamList } from "./types";
 import Main from "../screens/Main";
 import Payment from "../screens/Payment";
 import Login from "../screens/Login";
-import { useState } from "../overmind";
+import { useOvermindState } from "../overmind";
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
@@ -26,7 +26,7 @@ const LoginNavigator = () => (
 );
 
 const Navigation = () => {
-  const { isLoggedIn } = useState();
+  const { isLoggedIn } = useOvermindState();
   return (
     <NavigationContainer linking={LinkingConfiguration} theme={DefaultTheme}>
       {isLoggedIn ? (
