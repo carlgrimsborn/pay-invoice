@@ -13,7 +13,7 @@ const Main = () => {
         <Text>pay using button below</Text>
         <Button title="Pay" onPress={() => {}}></Button>
       </View>
-      <Button title="Log Out" onPress={() => cleanState()}></Button>
+      <Button title="Log Out" onPress={cleanState}></Button>
     </SafeAreaView>
   );
 };
