@@ -1,12 +1,19 @@
-import { StatusBar } from "expo-status-bar";
 import { StyleSheet, Text, View } from "react-native";
+import { config } from "./overmind";
+import { Provider } from "overmind-react";
+import { SafeAreaProvider } from "react-native-safe-area-context";
+import { createOvermind } from "overmind";
+import React from "react";
+import Navigation from "./navigation";
 
 export default function App() {
+  const overmind = createOvermind(config);
   return (
-    <View style={styles.container}>
-      <Text>Open up App.tsx to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <Provider value={overmind}>
+      <SafeAreaProvider>
+        <Navigation />
+      </SafeAreaProvider>
+    </Provider>
   );
 }
 
