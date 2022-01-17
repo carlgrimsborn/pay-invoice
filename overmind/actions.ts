@@ -1,4 +1,4 @@
-import { Action } from "overmind";
+import { Action, AsyncAction } from "overmind";
 
 export const cleanState: Action = ({ state }) => {
   state.token = null;
@@ -14,3 +14,5 @@ export const cleanState: Action = ({ state }) => {
     due_date: null,
   };
 };
+
+export const login: AsyncAction = async ({ state }) => {};
