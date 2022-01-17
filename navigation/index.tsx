@@ -27,15 +27,19 @@ const LoginNavigator = () => (
 
 const Navigation = () => {
   const { isLoggedIn } = useOvermindState();
-  return (
-    <NavigationContainer linking={LinkingConfiguration} theme={DefaultTheme}>
-      {isLoggedIn ? (
+  if (isLoggedIn) {
+    return (
+      <NavigationContainer linking={LinkingConfiguration} theme={DefaultTheme}>
         <RootNavigator></RootNavigator>
-      ) : (
+      </NavigationContainer>
+    );
+  } else {
+    return (
+      <NavigationContainer>
         <LoginNavigator></LoginNavigator>
-      )}
-    </NavigationContainer>
-  );
+      </NavigationContainer>
+    );
+  }
 };
 
 export default Navigation;

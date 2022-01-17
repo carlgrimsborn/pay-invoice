@@ -1,6 +1,6 @@
 type User = {
-  firstName: string | null;
-  lastName: string | null;
+  username: string | null;
+  email: string | null;
   password: string | null;
 };
 
@@ -21,8 +21,8 @@ export const state: State = {
   token: null,
   isLoggedIn: false,
   user: {
-    firstName: null,
-    lastName: null,
+    username: null,
+    email: null,
     password: null,
   },
   payment: {
