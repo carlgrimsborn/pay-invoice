@@ -1,5 +1,6 @@
 import React from "react";
-import { View, StyleSheet, Text, Button, SafeAreaView } from "react-native";
+import { View, StyleSheet, Button, SafeAreaView } from "react-native";
+import BasicText from "../components/BasicText";
 import { useOvermindActions, useOvermindState } from "../overmind";
 
 const Summary = () => {
@@ -7,24 +8,24 @@ const Summary = () => {
   const { payment } = useOvermindState();
   return (
     <SafeAreaView style={styles.container}>
-      <Text style={styles.t1}>Success!</Text>
+      <BasicText style={styles.t1}>Success!</BasicText>
       <View style={{ alignItems: "center", marginBottom: 100 }}>
-        <Text style={styles.t2}>your invoice: </Text>
+        <BasicText style={styles.t2}>Your invoice: </BasicText>
         <View style={styles.v1}>
-          <Text>Reciver: </Text>
-          <Text>{payment.receiver}</Text>
+          <BasicText>Reciver: </BasicText>
+          <BasicText>{payment.receiver}</BasicText>
         </View>
         <View style={styles.v1}>
-          <Text>Amount: </Text>
-          <Text>{payment.amount + "kr"}</Text>
+          <BasicText>Amount: </BasicText>
+          <BasicText>{payment.amount + "kr"}</BasicText>
         </View>
         <View style={styles.v1}>
-          <Text>Due date: </Text>
-          <Text>{payment.due_date}</Text>
+          <BasicText>Due date: </BasicText>
+          <BasicText>{payment.due_date}</BasicText>
         </View>
         <View style={styles.v2}>
-          <Text>Type: </Text>
-          <Text>
+          <BasicText>Type: </BasicText>
+          <BasicText>
             {payment.type === "basic"
               ? "Paying now"
               : payment.type === "extended"
@@ -32,7 +33,7 @@ const Summary = () => {
               : payment.type === "splitted"
               ? "Splitted in 12 months"
               : "could not get type"}
-          </Text>
+          </BasicText>
         </View>
       </View>
       <Button title="Home" onPress={pressHome}></Button>

@@ -1,5 +1,7 @@
 import React from "react";
 import { View, TextInput, Text, StyleSheet } from "react-native";
+import { SecondaryInteractive } from "../Colors";
+import BasicText from "./BasicText";
 
 type Props = {
   title: string;
@@ -10,7 +12,7 @@ type Props = {
 const FormRow: React.FC<Props> = ({ value, onChangeText, title }) => {
   return (
     <View style={styles.formRow}>
-      <Text style={styles.formText}>{title}</Text>
+      <BasicText>{title}</BasicText>
       <TextInput
         style={styles.input}
         value={value}
@@ -31,9 +33,8 @@ const styles = StyleSheet.create({
     flex: 1,
     borderBottomWidth: 1,
     fontSize: 20,
-  },
-  formText: {
-    fontSize: 20,
+    borderColor: SecondaryInteractive,
+    color: SecondaryInteractive,
   },
 });
 

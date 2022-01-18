@@ -14,6 +14,8 @@ import { useOvermindActions, useOvermindState } from "../overmind";
 import { KeyboardAwareView } from "react-native-keyboard-aware-view";
 import { useNavigation } from "@react-navigation/native";
 import FormRow from "../components/FormRow";
+import BasicText from "../components/BasicText";
+import { SecondaryInteractive } from "../Colors";
 
 const Invoice = () => {
   const { payment } = useOvermindState();
@@ -52,11 +54,11 @@ const Invoice = () => {
             style={{ flex: 1 }}
             contentContainerStyle={{ alignItems: "center" }}
           >
-            <Text style={styles.header}>Scanned image: </Text>
+            <BasicText style={styles.header}>Scanned image: </BasicText>
             <Image style={styles.image} source={{ uri: payment.uri }}></Image>
-            <Text style={styles.header2}>
+            <BasicText style={styles.header2}>
               Is following the information correct?{" "}
-            </Text>
+            </BasicText>
 
             <View>
               <FormRow
@@ -104,8 +106,13 @@ const styles = StyleSheet.create({
     width: "100%",
     height: 200,
   },
-  header: { fontSize: 18, marginBottom: 10 },
-  header2: { fontSize: 18, marginTop: 10, marginBottom: 10 },
+  header: { fontSize: 18, marginBottom: 10, color: SecondaryInteractive },
+  header2: {
+    fontSize: 18,
+    marginTop: 10,
+    marginBottom: 10,
+    color: SecondaryInteractive,
+  },
   button: {
     alignSelf: "flex-end",
   },

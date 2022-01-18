@@ -4,6 +4,8 @@ import { Camera } from "expo-camera";
 import { useNavigation } from "@react-navigation/native";
 import { useOvermindActions } from "../overmind";
 import { documentScanLibResponse } from "../mockData";
+import { Primary } from "../Colors";
+import BasicButton from "../components/BasicButton";
 
 const Payment = () => {
   const [hasPermission, setHasPermission] = useState(null);
@@ -33,8 +35,8 @@ const Payment = () => {
           setCamera(ref);
         }}
       >
-        <TouchableOpacity
-          style={styles.buttonContainer}
+        <BasicButton
+          title="Scan"
           onPress={() => {
             const takePicAsync = async () =>
               await camera?.takePictureAsync({
@@ -51,9 +53,7 @@ const Payment = () => {
               });
             takePicAsync();
           }}
-        >
-          <Text style={styles.text}> Scan </Text>
-        </TouchableOpacity>
+        ></BasicButton>
       </Camera>
     </View>
   );
@@ -67,15 +67,6 @@ const styles = StyleSheet.create({
     paddingBottom: 50,
     alignItems: "center",
   },
-  buttonContainer: {
-    backgroundColor: "blue",
-    borderRadius: 25,
-    width: 100,
-    height: 65,
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  text: { fontSize: 20 },
 });
 
 export default Payment;

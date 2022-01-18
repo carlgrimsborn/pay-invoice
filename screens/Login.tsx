@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { View, Text, Button, TextInput, StyleSheet, Alert } from "react-native";
+import BasicText from "../components/BasicText";
 import { useOvermindActions } from "../overmind";
 
 const Login = () => {
@@ -8,20 +9,22 @@ const Login = () => {
   const [password, setpassword] = useState("");
   return (
     <View style={styles.container}>
-      <Text style={styles.headerInputText}>Email</Text>
-      <TextInput
-        style={styles.textInput}
-        value={email}
-        onChangeText={(t) => setemail(t)}
-      ></TextInput>
-      <Text style={styles.headerInputText}>Password</Text>
-      <TextInput
-        style={styles.textInput}
-        value={password}
-        onChangeText={(t) => setpassword(t)}
-      ></TextInput>
+      <View style={{ width: "100%", alignItems: "center" }}>
+        <BasicText>Email</BasicText>
+        <TextInput
+          style={styles.textInput}
+          value={email}
+          onChangeText={(t) => setemail(t)}
+        ></TextInput>
+        <BasicText>Password</BasicText>
+        <TextInput
+          style={styles.textInput}
+          value={password}
+          onChangeText={(t) => setpassword(t)}
+        ></TextInput>
+      </View>
       <Button
-        title="login"
+        title="Login"
         onPress={async () => {
           await login({ email, password });
         }}
@@ -37,19 +40,15 @@ const styles = StyleSheet.create({
     textAlign: "center",
     fontSize: 20,
     borderBottomWidth: 1,
-    marginBottom: 20,
-  },
-  headerInputText: {
-    fontSize: 20,
-  },
-  loginButton: {
-    backgroundColor: "red",
+    marginBottom: 30,
+    marginTop: 10,
   },
   container: {
     paddingHorizontal: 20,
-    paddingTop: 20,
+    paddingTop: 100,
     flex: 1,
     alignItems: "center",
+    justifyContent: "space-between",
   },
 });
 

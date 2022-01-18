@@ -8,6 +8,8 @@ import {
   TouchableOpacity,
   ScrollView,
 } from "react-native";
+import { SecondaryInteractive } from "../Colors";
+import BasicText from "../components/BasicText";
 import ConfirmationButton from "../components/ConfirmationButton";
 import { useOvermindActions, useOvermindState } from "../overmind";
 
@@ -30,7 +32,7 @@ const Confirmation = () => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <Text style={styles.headerText}>How do you wish to pay?</Text>
+      <BasicText style={styles.headerText}>How do you wish to pay?</BasicText>
       <ScrollView contentContainerStyle={{ flex: 1 }}>
         <View style={styles.buttons}>
           <ConfirmationButton
@@ -62,6 +64,7 @@ const styles = StyleSheet.create({
     marginTop: 20,
     marginBottom: 20,
     alignSelf: "center",
+    color: SecondaryInteractive,
   },
   buttons: {
     flex: 1,
