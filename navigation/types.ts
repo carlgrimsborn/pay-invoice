@@ -9,3 +9,7 @@ export type RootStackParamList = {
 export type LoginStackParamList = {
   Login: undefined;
 };
+
+export type SummaryStackParamList = {
+  Summary: undefined;
+};

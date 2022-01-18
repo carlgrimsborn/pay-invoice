@@ -70,7 +70,7 @@ export const authorizePayment: AsyncAction = async ({ state }) => {
 
 type PaymentInput = {
   type: "basic" | "extended" | "splitted";
-  completionHandler: () => void;
+  completionHandler?: () => void;
 };
 
 export const paymentMethod: AsyncAction<PaymentInput> = async (
@@ -103,9 +103,14 @@ export const paymentMethod: AsyncAction<PaymentInput> = async (
         }
       );
       if (resp.status === 200) {
-        const responseFromServer = paymentResponse();
+        const responseFromServer = paymentResponse(
+          state.payment.receiver,
+          state.payment.amount,
+          state.payment.due_date
+        );
         if (responseFromServer.data.payment_status === "success") {
-          completionHandler();
+          completionHandler ? completionHandler() : null;
+          state.completedPayment = true;
         } else {
           throw new Error("server error");
         }
@@ -134,4 +139,8 @@ export const setPayment: Action<SetPaymentInput> = (
   state.payment.amount = amount;
   state.payment.due_date = due_date;
   state.payment.uri = uri;
+};
+
+export const pressHome: Action = ({ state }) => {
+  state.completedPayment = false;
 };

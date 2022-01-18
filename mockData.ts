@@ -21,10 +21,19 @@ export const documentScanLibResponse = () => {
   };
 };
 
-export const paymentResponse = () => {
+export const paymentResponse = (
+  receiver: string,
+  amount: number,
+  due_date: string
+) => {
   return {
     data: {
       payment_status: "success",
+      object: {
+        receiver,
+        amount,
+        due_date,
+      },
     },
   };
 };

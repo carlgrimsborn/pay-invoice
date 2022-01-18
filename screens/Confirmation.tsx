@@ -21,17 +21,14 @@ const Confirmation = () => {
     if (index === 0) {
       paymentMethod({
         type: "basic",
-        completionHandler: () => navigation.navigate("Summary"),
       });
     } else if (index === 1) {
       paymentMethod({
         type: "extended",
-        completionHandler: () => navigation.navigate("Summary"),
       });
     } else if (index === 2) {
       paymentMethod({
         type: "splitted",
-        completionHandler: () => navigation.navigate("Summary"),
       });
     }
   };
@@ -53,7 +50,7 @@ const Confirmation = () => {
           />
           <ConfirmationButton
             amount={amount / 12 + " kr / month"}
-            title="Split in 12 month"
+            title="Split in 12 months"
             onPress={() => finalizePayment(2)}
           />
         </View>

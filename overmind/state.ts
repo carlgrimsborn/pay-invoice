@@ -15,6 +15,7 @@ type State = {
   token: string | null;
   autostarttoken: string | null;
   isLoggedIn: boolean;
+  completedPayment: boolean;
   user: User;
   payment: Payment;
 };
@@ -23,6 +24,7 @@ export const state: State = {
   token: null,
   autostarttoken: null,
   isLoggedIn: false,
+  completedPayment: false,
   user: {
     username: null,
     email: null,
