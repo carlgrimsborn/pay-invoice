@@ -57,7 +57,7 @@ export const login: AsyncAction<LoginInput> = async (
 
 type SetPaymentInput = {
   receiver: string;
-  amount: string;
+  amount: number;
   due_date: string;
   uri: string;
 };

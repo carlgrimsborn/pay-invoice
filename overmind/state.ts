@@ -6,7 +6,7 @@ type User = {
 
 type Payment = {
   receiver: string | null;
-  amount: string | null;
+  amount: number | null;
   due_date: string | null;
   uri: string | null;
 };

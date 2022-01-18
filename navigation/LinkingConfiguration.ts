@@ -9,6 +9,8 @@ const linking: LinkingOptions<RootStackParamList> = {
       Main: "Main",
       Payment: "Payment",
       Invoice: "Invoice",
+      Confirmation: "Confirmation",
+      Summary: "Summary",
     },
   },
 };

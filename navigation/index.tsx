@@ -8,6 +8,8 @@ import Payment from "../screens/Payment";
 import Login from "../screens/Login";
 import { useOvermindState } from "../overmind";
 import Invoice from "../screens/Invoice";
+import Confirmation from "../screens/Confirmation";
+import Summary from "../screens/Summary";
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
@@ -16,6 +18,8 @@ const RootNavigator = () => (
     <Stack.Screen name="Main" component={Main}></Stack.Screen>
     <Stack.Screen name="Payment" component={Payment}></Stack.Screen>
     <Stack.Screen name="Invoice" component={Invoice}></Stack.Screen>
+    <Stack.Screen name="Confirmation" component={Confirmation}></Stack.Screen>
+    <Stack.Screen name="Summary" component={Summary}></Stack.Screen>
   </Stack.Navigator>
 );
 

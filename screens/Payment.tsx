@@ -44,7 +44,7 @@ const Payment = () => {
                     uri: pic.uri,
                     amount: response.amount,
                     due_date: response.due_date,
-                    receiver: response.due_date,
+                    receiver: response.receiver,
                   });
                   navigation.navigate("Invoice");
                 },

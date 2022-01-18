@@ -7,16 +7,47 @@ import {
   TextInput,
   Button,
   ScrollView,
+  Alert,
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { useOvermindState } from "../overmind";
+import { useOvermindActions, useOvermindState } from "../overmind";
 import { KeyboardAwareView } from "react-native-keyboard-aware-view";
+import { useNavigation } from "@react-navigation/native";
+import FormRow from "../components/FormRow";
 
 const Invoice = () => {
   const { payment } = useOvermindState();
-  const [reciever, setReciever] = useState(payment.receiver);
-  const [amount, setAmount] = useState(payment.amount);
-  const [dueDate, setDueDate] = useState(payment.due_date);
+  const { setPayment } = useOvermindActions();
+  const [receiver, setReceiver] = useState(
+    payment.receiver ? payment.receiver : ""
+  );
+  const [amount, setAmount] = useState(
+    payment.amount ? payment.amount.toString() : ""
+  );
+  const [dueDate, setDueDate] = useState(
+    payment.due_date ? payment.due_date : ""
+  );
+  const navigation = useNavigation();
+
+  const Confirm = () => {
+    if (receiver.length === 0 && amount.length === 0 && dueDate.length === 0) {
+      Alert.alert("please enter information");
+    } else if (
+      payment.amount === parseInt(amount) &&
+      payment.due_date === dueDate &&
+      payment.receiver === receiver
+    ) {
+      return;
+    } else {
+      setPayment({
+        amount: parseInt(amount),
+        due_date: dueDate,
+        receiver,
+        uri: payment.uri ? payment.uri : "",
+      });
+    }
+  };
+
   return (
     <SafeAreaView style={styles.parentContainer}>
       <View style={styles.container}>
@@ -32,36 +63,33 @@ const Invoice = () => {
             </Text>
 
             <View>
-              <View style={styles.formRow}>
-                <Text style={styles.formText}>Reciever: </Text>
-                <TextInput
-                  style={styles.input}
-                  value={reciever}
-                  onChangeText={(t) => setReciever(t)}
-                ></TextInput>
-              </View>
-              <View style={styles.formRow}>
-                <Text style={styles.formText}>Amount: </Text>
-                <TextInput
-                  style={styles.input}
-                  value={amount}
-                  onChangeText={(t) => setAmount(t)}
-                ></TextInput>
-              </View>
-              <View style={styles.formRow}>
-                <Text style={styles.formText}>Due date: </Text>
-                <TextInput
-                  style={styles.input}
-                  value={dueDate}
-                  onChangeText={(t) => setDueDate(t)}
-                ></TextInput>
-              </View>
+              <FormRow
+                title="Reciever: "
+                value={receiver}
+                onChangeText={(t) => setReceiver(t)}
+              />
+              <FormRow
+                title="Amount: "
+                value={amount}
+                onChangeText={(t) => setAmount(t)}
+              />
+              <FormRow
+                title="Due date: "
+                value={dueDate}
+                onChangeText={(t) => setDueDate(t)}
+              />
             </View>
           </ScrollView>
         </KeyboardAwareView>
       </View>
       <View>
-        <Button title="Next" onPress={() => {}}></Button>
+        <Button
+          title="Next"
+          onPress={() => {
+            Confirm();
+            navigation.navigate("Confirmation");
+          }}
+        ></Button>
       </View>
     </SafeAreaView>
   );
@@ -80,20 +108,6 @@ const styles = StyleSheet.create({
   image: {
     width: "100%",
     height: 200,
-  },
-  formRow: {
-    flexDirection: "row",
-    marginVertical: 20,
-    width: "90%",
-    justifyContent: "space-around",
-  },
-  input: {
-    flex: 1,
-    borderBottomWidth: 1,
-    fontSize: 20,
-  },
-  formText: {
-    fontSize: 20,
   },
   header: { fontSize: 18, marginBottom: 10 },
   header2: { fontSize: 18, marginTop: 10, marginBottom: 10 },
