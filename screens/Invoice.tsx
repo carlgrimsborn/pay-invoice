@@ -29,15 +29,9 @@ const Invoice = () => {
   );
   const navigation = useNavigation();
 
-  const Confirm = () => {
+  const confirm = () => {
     if (receiver.length === 0 && amount.length === 0 && dueDate.length === 0) {
       Alert.alert("please enter information");
-    } else if (
-      payment.amount === parseInt(amount) &&
-      payment.due_date === dueDate &&
-      payment.receiver === receiver
-    ) {
-      return;
     } else {
       setPayment({
         amount: parseInt(amount),
@@ -45,6 +39,8 @@ const Invoice = () => {
         receiver,
         uri: payment.uri ? payment.uri : "",
       });
+
+      navigation.navigate("Confirmation");
     }
   };
 
@@ -86,8 +82,7 @@ const Invoice = () => {
         <Button
           title="Next"
           onPress={() => {
-            Confirm();
-            navigation.navigate("Confirmation");
+            confirm();
           }}
         ></Button>
       </View>

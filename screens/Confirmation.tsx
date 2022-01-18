@@ -1,3 +1,4 @@
+import { useNavigation } from "@react-navigation/native";
 import React from "react";
 import {
   View,
@@ -8,11 +9,33 @@ import {
   ScrollView,
 } from "react-native";
 import ConfirmationButton from "../components/ConfirmationButton";
-import { useOvermindState } from "../overmind";
+import { useOvermindActions, useOvermindState } from "../overmind";
 
 const Confirmation = () => {
   const { payment } = useOvermindState();
+  const { paymentMethod } = useOvermindActions();
   const amount = payment.amount ? payment.amount : 0;
+  const navigation = useNavigation();
+
+  const finalizePayment = (index: number) => {
+    if (index === 0) {
+      paymentMethod({
+        type: "basic",
+        completionHandler: () => navigation.navigate("Summary"),
+      });
+    } else if (index === 1) {
+      paymentMethod({
+        type: "extended",
+        completionHandler: () => navigation.navigate("Summary"),
+      });
+    } else if (index === 2) {
+      paymentMethod({
+        type: "splitted",
+        completionHandler: () => navigation.navigate("Summary"),
+      });
+    }
+  };
+
   return (
     <SafeAreaView style={styles.container}>
       <Text style={styles.headerText}>How do you wish to pay?</Text>
@@ -21,17 +44,17 @@ const Confirmation = () => {
           <ConfirmationButton
             amount={amount + " kr"}
             title="Pay now"
-            onPress={() => {}}
+            onPress={() => finalizePayment(0)}
           />
           <ConfirmationButton
             amount={amount + " kr"}
             title="Pay in 30 days"
-            onPress={() => {}}
+            onPress={() => finalizePayment(1)}
           />
           <ConfirmationButton
             amount={amount / 12 + " kr / month"}
             title="Split in 12 month"
-            onPress={() => {}}
+            onPress={() => finalizePayment(2)}
           />
         </View>
       </ScrollView>
