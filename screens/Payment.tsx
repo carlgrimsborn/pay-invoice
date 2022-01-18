@@ -3,12 +3,13 @@ import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
 import { Camera } from "expo-camera";
 import { useNavigation } from "@react-navigation/native";
 import { useOvermindActions } from "../overmind";
+import { documentScanLibResponse } from "../mockData";
 
 const Payment = () => {
   const [hasPermission, setHasPermission] = useState(null);
   const [camera, setCamera] = useState<Camera | null>();
   const navigation = useNavigation();
-  const { setPaymentUri } = useOvermindActions();
+  const { setPayment } = useOvermindActions();
 
   useEffect(() => {
     (async () => {
@@ -38,8 +39,13 @@ const Payment = () => {
             const takePicAsync = async () =>
               await camera?.takePictureAsync({
                 onPictureSaved: (pic) => {
-                  console.log(pic);
-                  setPaymentUri({ uri: pic.uri });
+                  const response = documentScanLibResponse();
+                  setPayment({
+                    uri: pic.uri,
+                    amount: response.amount,
+                    due_date: response.due_date,
+                    receiver: response.due_date,
+                  });
                   navigation.navigate("Invoice");
                 },
               });

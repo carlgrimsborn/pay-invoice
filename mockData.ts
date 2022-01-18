@@ -10,3 +10,11 @@ export const loginResponse = (email: string, password: string) => {
     },
   };
 };
+
+export const documentScanLibResponse = () => {
+  return {
+    receiver: "Tele2 AB",
+    amount: "19 167kr",
+    due_date: "2020-06-06",
+  };
+};

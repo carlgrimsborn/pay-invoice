@@ -55,13 +55,19 @@ export const login: AsyncAction<LoginInput> = async (
   }
 };
 
-type SetPaymentUriInput = {
+type SetPaymentInput = {
+  receiver: string;
+  amount: string;
+  due_date: string;
   uri: string;
 };
 
-export const setPaymentUri: Action<SetPaymentUriInput> = (
+export const setPayment: Action<SetPaymentInput> = (
   { state },
-  { uri }
+  { amount, due_date, receiver, uri }
 ) => {
+  state.payment.receiver = receiver;
+  state.payment.amount = amount;
+  state.payment.due_date = due_date;
   state.payment.uri = uri;
 };

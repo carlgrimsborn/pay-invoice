@@ -14,9 +14,9 @@ import { KeyboardAwareView } from "react-native-keyboard-aware-view";
 
 const Invoice = () => {
   const { payment } = useOvermindState();
-  const [reciever, setReciever] = useState("");
-  const [amount, setAmount] = useState("");
-  const [dueDate, setDueDate] = useState("");
+  const [reciever, setReciever] = useState(payment.receiver);
+  const [amount, setAmount] = useState(payment.amount);
+  const [dueDate, setDueDate] = useState(payment.due_date);
   return (
     <SafeAreaView style={styles.parentContainer}>
       <View style={styles.container}>
