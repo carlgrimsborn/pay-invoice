@@ -13,24 +13,19 @@ import { useOvermindActions, useOvermindState } from "../overmind";
 
 const Confirmation = () => {
   const { payment } = useOvermindState();
-  const { paymentMethod } = useOvermindActions();
+  const { paymentMethod, setPaymentType } = useOvermindActions();
   const amount = payment.amount ? payment.amount : 0;
   const navigation = useNavigation();
 
   const finalizePayment = (index: number) => {
     if (index === 0) {
-      paymentMethod({
-        type: "basic",
-      });
+      setPaymentType({ type: "basic" });
     } else if (index === 1) {
-      paymentMethod({
-        type: "extended",
-      });
+      setPaymentType({ type: "extended" });
     } else if (index === 2) {
-      paymentMethod({
-        type: "splitted",
-      });
+      setPaymentType({ type: "splitted" });
     }
+    paymentMethod();
   };
 
   return (

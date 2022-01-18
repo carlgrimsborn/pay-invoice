@@ -8,6 +8,7 @@ type Payment = {
   receiver: string | null;
   amount: number | null;
   due_date: string | null;
+  type: ("basic" | "extended" | "splitted") | null;
   uri: string | null;
 };
 
@@ -34,6 +35,7 @@ export const state: State = {
     receiver: null,
     amount: null,
     due_date: null,
+    type: null,
     uri: null,
   },
 };

@@ -6,6 +6,8 @@ import { loginResponse, paymentResponse } from "../mockData";
 export const cleanState: Action = ({ state }) => {
   state.token = null;
   state.isLoggedIn = false;
+  state.completedPayment = false;
+  state.autostarttoken = null;
   state.user = {
     username: null,
     email: null,
@@ -15,6 +17,7 @@ export const cleanState: Action = ({ state }) => {
     receiver: null,
     amount: null,
     due_date: null,
+    type: null,
     uri: null,
   };
 };
@@ -68,25 +71,17 @@ export const authorizePayment: AsyncAction = async ({ state }) => {
   }
 };
 
-type PaymentInput = {
-  type: "basic" | "extended" | "splitted";
-  completionHandler?: () => void;
-};
-
-export const paymentMethod: AsyncAction<PaymentInput> = async (
-  { state, actions },
-  { type, completionHandler }
-) => {
+export const paymentMethod: AsyncAction = async ({ state, actions }) => {
   try {
     actions.authorizePayment();
     if (
       state.payment.receiver &&
       state.payment.amount &&
       state.payment.due_date &&
+      state.payment.type &&
       state.payment.receiver.length >= 1 &&
       state.payment.amount >= 1 &&
       state.payment.due_date.length >= 1 &&
-      type &&
       state.token
     ) {
       const resp = await axios.post(
@@ -95,7 +90,7 @@ export const paymentMethod: AsyncAction<PaymentInput> = async (
           receiver: state.payment.receiver,
           amount: state.payment.amount,
           due_date: state.payment.due_date,
-          type,
+          type: state.payment.type,
           token: state.token,
         },
         {
@@ -109,7 +104,6 @@ export const paymentMethod: AsyncAction<PaymentInput> = async (
           state.payment.due_date
         );
         if (responseFromServer.data.payment_status === "success") {
-          completionHandler ? completionHandler() : null;
           state.completedPayment = true;
         } else {
           throw new Error("server error");
@@ -139,6 +133,12 @@ export const setPayment: Action<SetPaymentInput> = (
   state.payment.amount = amount;
   state.payment.due_date = due_date;
   state.payment.uri = uri;
+};
+
+export const setPaymentType: Action<{
+  type: "basic" | "extended" | "splitted";
+}> = ({ state }, { type }) => {
+  state.payment.type = type;
 };
 
 export const pressHome: Action = ({ state }) => {
