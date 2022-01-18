@@ -15,6 +15,7 @@ export const cleanState: Action = ({ state }) => {
     receiver: null,
     amount: null,
     due_date: null,
+    uri: null,
   };
 };
 
@@ -52,4 +53,15 @@ export const login: AsyncAction<LoginInput> = async (
     Alert.alert(e.toString());
     console.log(e);
   }
+};
+
+type SetPaymentUriInput = {
+  uri: string;
+};
+
+export const setPaymentUri: Action<SetPaymentUriInput> = (
+  { state },
+  { uri }
+) => {
+  state.payment.uri = uri;
 };

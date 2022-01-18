@@ -8,6 +8,7 @@ const linking: LinkingOptions<RootStackParamList> = {
     screens: {
       Main: "Main",
       Payment: "Payment",
+      Invoice: "Invoice",
     },
   },
 };

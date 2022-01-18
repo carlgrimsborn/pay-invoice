@@ -7,6 +7,7 @@ import Main from "../screens/Main";
 import Payment from "../screens/Payment";
 import Login from "../screens/Login";
 import { useOvermindState } from "../overmind";
+import Invoice from "../screens/Invoice";
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
@@ -14,6 +15,7 @@ const RootNavigator = () => (
   <Stack.Navigator>
     <Stack.Screen name="Main" component={Main}></Stack.Screen>
     <Stack.Screen name="Payment" component={Payment}></Stack.Screen>
+    <Stack.Screen name="Invoice" component={Invoice}></Stack.Screen>
   </Stack.Navigator>
 );
 
