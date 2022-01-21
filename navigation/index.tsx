@@ -1,5 +1,5 @@
 import { NavigationContainer, DefaultTheme } from "@react-navigation/native";
-import LinkingConfiguration from "./LinkingConfiguration";
+import { linking, linkingLogin } from "./LinkingConfiguration";
 
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import {
@@ -94,10 +94,7 @@ const Navigation = () => {
     return (
       <ImageBackground source={backgroundIMG1} style={{ flex: 1 }}>
         <SafeAreaView style={{ flex: 1 }}>
-          <NavigationContainer
-            linking={LinkingConfiguration}
-            theme={DefaultTheme}
-          >
+          <NavigationContainer linking={linking} theme={DefaultTheme}>
             <RootNavigator></RootNavigator>
           </NavigationContainer>
         </SafeAreaView>
@@ -107,7 +104,7 @@ const Navigation = () => {
     return (
       <ImageBackground source={backgroundIMG3} style={{ flex: 1 }}>
         <SafeAreaView style={{ flex: 1 }}>
-          <NavigationContainer theme={DefaultTheme}>
+          <NavigationContainer theme={DefaultTheme} linking={linking}>
             <LoginNavigator></LoginNavigator>
           </NavigationContainer>
         </SafeAreaView>
